@@ -417,7 +417,24 @@
     font-size: 0.95rem;
   }
   .feature-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
-
+  /* TUR ROTA */
+  .tur-rota-wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  @media(max-width: 700px) { .tur-rota-wrap { grid-template-columns: 1fr; } }
+  .tur-rota-visual {
+    border-radius: 1.5rem; overflow: hidden;
+    background: linear-gradient(160deg, #0a2a4a, #0a7a6e);
+    min-height: 380px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .tur-rota-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 /* GALLERY */
 #galeri {
   background: var(--sand);
@@ -663,9 +680,16 @@
 <div id="tur-rotasi" style="background: var(--sand-light);">
 
 <section>
-  <span class="section-tag">Tur Rotası</span>
-  <h2 class="section-title">Tur Rotamız</h2>
-  <p class="section-desc">Aksu Çayı’ndan başlayan turumuzda Düden Şelalesi, Yapay Şelale, Küçük Şelale, Kuş Mağarası ve Dilek Taşı rotalarını ziyaret ediyoruz. Şelale yanında yüzme molası ve yemek molası veriyoruz. Ayrıca uygun koşullarda caretta carettalarla yüzme imkânı da sunulmaktadır.</p>
+  <div class="tur-rota-wrap">
+    <div class="tur-rota-text">
+      <span class="section-tag">Tur Rotası</span>
+      <h2 class="section-title">Tur Rotamız</h2>
+      <p class="section-desc">Aksu Çayı’ndan başlayan turumuzda Düden Şelalesi, Yapay Şelale, Küçük Şelale, Kuş Mağarası ve Dilek Taşı rotalarını ziyaret ediyoruz. Şelale yanında yüzme molası ve yemek molası veriyoruz. Ayrıca uygun koşullarda caretta carettalarla yüzme imkânı da sunulmaktadır.</p>
+    </div>
+    <div class="tur-rota-visual">
+      <img src="turrota.jpg" alt="Tur Rotası Görseli">
+    </div>
+  </div>
 </section>
 
 <div class="stats">
@@ -689,22 +713,22 @@
   <div class="gallery-grid">
     <div class="gallery-item">
       <img src="galeri1.jpeg" alt="Çağlar Reis tekne turu manzarası">
-      <div class="gallery-caption">Mavi Tur Keyfi</div>
+      <div class="gallery-caption"></div>
     </div>
 
     <div class="gallery-item">
       <img src="galeri2.jpeg" alt="Antalya koyları">
-      <div class="gallery-caption">Saklı Koylar</div>
+      <div class="gallery-caption"></div>
     </div>
 
     <div class="gallery-item">
       <img src="galeri3.jpeg" alt="Tekne turu gün batımı">
-      <div class="gallery-caption">Gün Batımı</div>
+      <div class="gallery-caption"></div>
     </div>
 
     <div class="gallery-item">
       <img src="galeri4.jpeg" alt="Denizde yüzme molası">
-      <div class="gallery-caption">Yüzme Molası</div>
+      <div class="gallery-caption"></div>
     </div>
   </div>
 </section>
