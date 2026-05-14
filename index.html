@@ -37,10 +37,21 @@
     backdrop-filter: blur(12px);
   }
   .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem; font-weight: 600;
-    color: var(--turquoise); letter-spacing: 0.04em;
-  }
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--turquoise);
+  letter-spacing: 0.04em;
+}
+
+.nav-logo img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
   .nav-links { display: flex; gap: 2rem; }
   .nav-links a {
     color: rgba(255,255,255,0.8); text-decoration: none;
@@ -408,7 +419,10 @@
 <body>
 
 <nav>
-  <div class="nav-logo">⚓ Çağlar Reis</div>
+  <div class="nav-logo">
+  <img src="logo.png" alt="Çağlar Reis Logo">
+  <span>Çağlar Reis</span>
+</div>
   <div class="nav-links">
     <a href="#turlar">Turlar</a>
     <a href="#hakkimizda">Hakkımızda</a>
