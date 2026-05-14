@@ -131,6 +131,156 @@
     background: var(--turquoise); display: block;
   }
 
+/* WELCOME & QUICK CONTACT */
+.welcome-contact {
+  background: var(--sand);
+  padding: 4rem 2rem;
+}
+
+.welcome-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.welcome-text .section-desc {
+  max-width: 650px;
+}
+
+.quick-contact-box {
+  background: var(--white);
+  border-radius: 1.4rem;
+  padding: 2rem;
+  box-shadow: 0 18px 45px rgba(10,42,74,0.12);
+  border: 1px solid rgba(10,42,74,0.08);
+}
+
+.quick-contact-box h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  color: var(--navy);
+  margin-bottom: 0.7rem;
+}
+
+.quick-contact-box p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.quick-contact-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.9rem 1.2rem;
+  border-radius: 3rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.25s;
+  margin-top: 0.8rem;
+}
+
+.quick-contact-btn.whatsapp {
+  background: var(--teal-light);
+  color: var(--white);
+}
+
+.quick-contact-btn.phone {
+  background: transparent;
+  color: var(--navy);
+  border: 1.5px solid rgba(10,42,74,0.2);
+}
+
+.quick-contact-btn:hover {
+  transform: translateY(-2px);
+}
+
+.quick-contact-btn.whatsapp:hover {
+  background: var(--turquoise);
+  color: var(--navy);
+}
+
+.quick-contact-btn.phone:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+@media(max-width: 800px) {
+  .welcome-wrap {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.quick-form-group {
+  margin-bottom: 1rem;
+}
+
+.quick-form-group label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.4rem;
+}
+
+.quick-form-group input,
+.quick-form-group textarea {
+  width: 100%;
+  border: 1px solid rgba(10,42,74,0.12);
+  border-radius: 0.75rem;
+  padding: 0.8rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--navy);
+  background: var(--sand-light);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.quick-form-group input:focus,
+.quick-form-group textarea:focus {
+  border-color: var(--teal);
+}
+
+.quick-form-group textarea {
+  height: 90px;
+  resize: none;
+}
+
+.quick-submit {
+  width: 100%;
+  background: var(--teal-light);
+  color: var(--white);
+  border: none;
+  border-radius: 3rem;
+  padding: 0.95rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.25s;
+  margin-top: 0.3rem;
+}
+
+.quick-submit:hover {
+  background: var(--turquoise);
+  color: var(--navy);
+  transform: translateY(-2px);
+}
+
+.quick-contact-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
   /* STATS */
   .stats {
     background: var(--sand);
@@ -459,9 +609,61 @@
   </div>
 </section>
 
+<!-- KARŞILAMA & HIZLI İLETİŞİM -->
+<div class="welcome-contact">
+  <section class="welcome-wrap">
+    
+    <div class="welcome-text">
+      <span class="section-tag">Hoş Geldiniz</span>
+      <h2 class="section-title">Denizin Büyüsüne<br>Hoş Geldiniz!</h2>
+      <p class="section-desc">
+        Antalya Sea Lux, deniz tutkusunu en özel anlarınızla buluşturan bir adrestir.
+        Lüks ve konforun denizle buluştuğu bu yolculukta, her anınızı unutulmaz kılmak için buradayız.
+        Denizin mavisiyle çevrili bu serüvende, VIP hizmetimizle sizi ağırlamaktan mutluluk duyarız.
+        Hayallerinizin ötesinde bir deniz deneyimi için adım atın ve bizimle beraber unutulmaz anılar biriktirin.
+        Antalya Sea Lux ailesine katılmak için şimdi iletişime geçin!
+      </p>
+    </div>
+
+    <div class="quick-contact-box">
+  <h3>Hızlı İletişim</h3>
+  <p>Rezervasyon ve detaylı bilgi için bize hemen ulaşabilirsiniz.</p>
+
+  <div class="quick-form-group">
+    <label>Adınız Soyadınız</label>
+    <input type="text" placeholder="Ad Soyad">
+  </div>
+
+  <div class="quick-form-group">
+    <label>Telefon Numaranız</label>
+    <input type="tel" placeholder="+90 5xx xxx xx xx">
+  </div>
+
+  <div class="quick-form-group">
+    <label>Mesajınız</label>
+    <textarea placeholder="Tarih, kişi sayısı veya sorularınız..."></textarea>
+  </div>
+
+  <button class="quick-submit" onclick="handleSubmit()">Mesaj Gönder →</button>
+
+  <div class="quick-contact-buttons">
+    <a href="https://wa.me/905448020266" target="_blank" class="quick-contact-btn whatsapp">
+      💬 WhatsApp
+    </a>
+
+    <a href="tel:+905448020266" class="quick-contact-btn phone">
+      📞 Ara
+    </a>
+  </div>
+</div>
+
+  </section>
+</div>
+
 <!-- STATS -->
 <div class="stats">
-  <div class="stat-item">
+<!--
+<div class="stat-item">
     <div class="stat-num">100+</div>
     <div class="stat-label">Mutlu Müşteri</div>
   </div>
@@ -473,6 +675,7 @@
     <div class="stat-num">7/7</div>
     <div class="stat-label">Her Gün Açık</div>
   </div>
+-->
   <div class="stat-item">
     <div class="stat-num">Aksu Çayı</div>
     <div class="stat-label">Kalkış Noktası</div>
