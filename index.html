@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Çağlar Reis Tekne Turu</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
@@ -593,6 +594,82 @@
     nav { padding: 1rem 1.2rem; }
     .nav-links { display: none; }
   }
+
+  /* LANGUAGE SWITCHER */
+  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+  .lang-switcher { position: relative; }
+  .lang-current {
+    display: flex; align-items: center; gap: 0.4rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; letter-spacing: 0.05em;
+    padding: 0.45rem 0.85rem; border-radius: 2rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .lang-current:hover { background: rgba(64,224,208,0.15); border-color: rgba(64,224,208,0.4); }
+  .lang-caret { font-size: 0.55rem; transition: transform 0.2s; }
+  .lang-switcher.open .lang-caret { transform: rotate(180deg); }
+  .lang-menu {
+    position: absolute; top: calc(100% + 0.5rem); right: 0;
+    background: rgba(10,42,74,0.98);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 0.8rem; padding: 0.4rem;
+    display: flex; flex-direction: column; gap: 0.1rem;
+    min-width: 165px;
+    opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s; z-index: 200;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+  }
+  .lang-switcher.open .lang-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  .lang-menu button {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: transparent; border: none;
+    color: rgba(255,255,255,0.8);
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    padding: 0.6rem 0.8rem; border-radius: 0.5rem;
+    cursor: pointer; text-align: left; transition: all 0.15s; width: 100%;
+  }
+  .lang-menu button:hover { background: rgba(64,224,208,0.12); color: var(--turquoise); }
+  .lang-menu button.active { background: rgba(64,224,208,0.18); color: var(--turquoise); }
+  .lang-flag { font-size: 1.05rem; line-height: 1; }
+  @media(max-width: 600px) {
+    .nav-right { gap: 0; }
+    nav { padding: 0.6rem 1.2rem; }
+  }
+
+  /* RTL (Arabic) */
+  [dir="rtl"] body,
+  [dir="rtl"] .hero h1,
+  [dir="rtl"] .section-title,
+  [dir="rtl"] .nav-logo,
+  [dir="rtl"] .quick-contact-box h3,
+  [dir="rtl"] .contact-right h3,
+  [dir="rtl"] .features-visual-text,
+  [dir="rtl"] .stat-num,
+  [dir="rtl"] .tour-name,
+  [dir="rtl"] .price-num {
+    font-family: 'Cairo', 'DM Sans', sans-serif;
+  }
+  [dir="rtl"] .welcome-text,
+  [dir="rtl"] .section-desc,
+  [dir="rtl"] .tour-desc,
+  [dir="rtl"] .quick-contact-box,
+  [dir="rtl"] .feature-text,
+  [dir="rtl"] .contact-left,
+  [dir="rtl"] .quick-form-group label,
+  [dir="rtl"] .form-group label { text-align: right; }
+  [dir="rtl"] .lang-menu { right: auto; left: 0; }
+  [dir="rtl"] .lang-menu button { text-align: right; }
+  [dir="rtl"] .quick-form-group input,
+  [dir="rtl"] .quick-form-group textarea,
+  [dir="rtl"] .form-group input,
+  [dir="rtl"] .form-group textarea { text-align: right; direction: rtl; }
+  /* Phone fields stay LTR so the number reads correctly in RTL layouts */
+  [dir="rtl"] .quick-form-group input[type="tel"],
+  [dir="rtl"] .form-group input[type="tel"] { direction: ltr; text-align: right; }
 </style>
 </head>
 <body>
@@ -602,10 +679,26 @@
   <img src="logo.png" alt="Çağlar Reis Logo">
   <span>Çağlar Reis | Antalya Sea Lux</span>
 </div>
-  <div class="nav-links">
-    <a href="#turlar">Turlar</a>
-    <a href="#hakkimizda">Hakkımızda</a>
-    <a href="#iletisim">İletişim</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#turlar" data-i18n="nav_tours">Turlar</a>
+      <a href="#hakkimizda" data-i18n="nav_about">Hakkımızda</a>
+      <a href="#iletisim" data-i18n="nav_contact">İletişim</a>
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-current" type="button" aria-label="Language">
+        <span class="lang-flag">🌐</span>
+        <span class="lang-current-code">TR</span>
+        <span class="lang-caret">▼</span>
+      </button>
+      <div class="lang-menu">
+        <button type="button" data-lang="tr"><span class="lang-flag">🇹🇷</span> Türkçe</button>
+        <button type="button" data-lang="en"><span class="lang-flag">🇬🇧</span> English</button>
+        <button type="button" data-lang="ru"><span class="lang-flag">🇷🇺</span> Русский</button>
+        <button type="button" data-lang="de"><span class="lang-flag">🇩🇪</span> Deutsch</button>
+        <button type="button" data-lang="ar"><span class="lang-flag">🇸🇦</span> العربية</button>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -616,12 +709,12 @@
     <span></span><span></span><span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span><span></span><span></span>
   </div>
-  <div class="hero-badge">Antalya · Akdeniz</div>
-  <h1>Masmavi <em>Antalya</em>'yı<br>Denizden Keşfet</h1>
-  <p class="hero-sub">Çağlar Reis ile unutulmaz bir tekne turu deneyimi sizi bekliyor.</p>
+  <div class="hero-badge" data-i18n="hero_badge">Antalya · Akdeniz</div>
+  <h1 data-i18n="hero_title">Masmavi <em>Antalya</em>'yı<br>Denizden Keşfet</h1>
+  <p class="hero-sub" data-i18n="hero_sub">Çağlar Reis ile unutulmaz bir tekne turu deneyimi sizi bekliyor.</p>
   <div class="hero-btns">
-    <a href="#tur-rotasi" class="btn-primary">🚢 Rotayı Gör</a>
-    <a href="#iletisim" class="btn-outline">📞 Rezervasyon</a>
+    <a href="#tur-rotasi" class="btn-primary" data-i18n="hero_btn_route">🚢 Rotayı Gör</a>
+    <a href="#iletisim" class="btn-outline" data-i18n="hero_btn_book">📞 Rezervasyon</a>
   </div>
 </section>
 
@@ -630,9 +723,9 @@
   <section class="welcome-wrap">
     
     <div class="welcome-text">
-      <span class="section-tag">Hoş Geldiniz</span>
-      <h2 class="section-title">Denizin Büyüsüne<br>Hoş Geldiniz!</h2>
-      <p class="section-desc">
+      <span class="section-tag" data-i18n="welcome_tag">Hoş Geldiniz</span>
+      <h2 class="section-title" data-i18n="welcome_title">Denizin Büyüsüne<br>Hoş Geldiniz!</h2>
+      <p class="section-desc" data-i18n="welcome_text">
         Antalya Sea Lux, deniz tutkusunu en özel anlarınızla buluşturan bir adrestir.
         Lüks ve konforun denizle buluştuğu bu yolculukta, her anınızı unutulmaz kılmak için buradayız.
         Denizin mavisiyle çevrili bu serüvende, VIP hizmetimizle sizi ağırlamaktan mutluluk duyarız.
@@ -642,32 +735,32 @@
     </div>
 
     <div class="quick-contact-box">
-  <h3>Hızlı İletişim</h3>
-  <p>Rezervasyon ve detaylı bilgi için bize hemen ulaşabilirsiniz.</p>
+  <h3 data-i18n="quick_title">Hızlı İletişim</h3>
+  <p data-i18n="quick_text">Rezervasyon ve detaylı bilgi için bize hemen ulaşabilirsiniz.</p>
 
   <div class="quick-form-group">
-    <label>Adınız Soyadınız</label>
-    <input type="text" placeholder="Ad Soyad">
+    <label data-i18n="name_label">Adınız Soyadınız</label>
+    <input type="text" placeholder="Ad Soyad" data-i18n-placeholder="ph_name">
   </div>
 
   <div class="quick-form-group">
-    <label>Telefon Numaranız</label>
+    <label data-i18n="phone_label">Telefon Numaranız</label>
     <input type="tel" placeholder="+90 5xx xxx xx xx">
   </div>
 
   <div class="quick-form-group">
-    <label>Mesajınız</label>
-    <textarea placeholder="Tarih, kişi sayısı veya sorularınız..."></textarea>
+    <label data-i18n="msg_label">Mesajınız</label>
+    <textarea placeholder="Tarih, kişi sayısı veya sorularınız..." data-i18n-placeholder="ph_msg"></textarea>
   </div>
 
-  <button class="quick-submit" onclick="handleSubmit()">Mesaj Gönder →</button>
+  <button class="quick-submit" onclick="handleSubmit(this)" data-i18n="quick_send">Mesaj Gönder →</button>
 
   <div class="quick-contact-buttons">
     <a href="https://wa.me/905448020266" target="_blank" class="quick-contact-btn whatsapp">
       💬 WhatsApp
     </a>
 
-    <a href="tel:+905448020266" class="quick-contact-btn phone">
+    <a href="tel:+905448020266" class="quick-contact-btn phone" data-i18n="quick_call">
       📞 Ara
     </a>
   </div>
@@ -682,9 +775,9 @@
 <section>
   <div class="tur-rota-wrap">
     <div class="tur-rota-text">
-      <span class="section-tag">Tur Rotası</span>
-      <h2 class="section-title">Tur Rotamız</h2>
-      <p class="section-desc">Aksu Çayı’ndan başlayan turumuzda Düden Şelalesi, Yapay Şelale, Küçük Şelale, Kuş Mağarası ve Dilek Taşı rotalarını ziyaret ediyoruz. Şelale yanında yüzme molası ve yemek molası veriyoruz. Ayrıca uygun koşullarda caretta carettalarla yüzme imkânı da sunulmaktadır.</p>
+      <span class="section-tag" data-i18n="route_tag">Tur Rotası</span>
+      <h2 class="section-title" data-i18n="route_title">Tur Rotamız</h2>
+      <p class="section-desc" data-i18n="route_text">Aksu Çayı’ndan başlayan turumuzda Düden Şelalesi, Yapay Şelale, Küçük Şelale, Kuş Mağarası ve Dilek Taşı rotalarını ziyaret ediyoruz. Şelale yanında yüzme molası ve yemek molası veriyoruz. Ayrıca uygun koşullarda caretta carettalarla yüzme imkânı da sunulmaktadır.</p>
     </div>
     <div class="tur-rota-visual">
       <img src="turrota.jpg" alt="Tur Rotası Görseli">
@@ -695,7 +788,7 @@
 <div class="stats">
   <div class="stat-item">
     <div class="stat-num">Aksu Çayı</div>
-    <div class="stat-label">Kalkış Noktası</div>
+    <div class="stat-label" data-i18n="stat_label">Kalkış Noktası</div>
   </div>
 </div>
 
@@ -704,9 +797,9 @@
 <!-- GALERİ -->
 <div id="galeri">
 <section>
-  <span class="section-tag">Galeri</span>
-  <h2 class="section-title">Denizden<br>Unutulmaz Kareler</h2>
-  <p class="section-desc">
+  <span class="section-tag" data-i18n="gallery_tag">Galeri</span>
+  <h2 class="section-title" data-i18n="gallery_title">Denizden<br>Unutulmaz Kareler</h2>
+  <p class="section-desc" data-i18n="gallery_text">
     Çağlar Reis tekne turlarından manzaralar, koylar ve keyifli anlardan birkaç kare.
   </p>
 
@@ -737,27 +830,27 @@
 <!-- TURLAR -->
 <div id="turlar" style="background: var(--sand-light);">
 <section>
-  <span class="section-tag">Menü</span>
-  <h2 class="section-title">Denizde Lezzetli<br>Bir Mola</h2>
-  <p class="section-desc">Tur sırasında misafirlerimize sunulan taze ve özenle hazırlanmış menülerle keyifli bir deniz deneyimi yaşatıyoruz.</p>
+  <span class="section-tag" data-i18n="menu_tag">Menü</span>
+  <h2 class="section-title" data-i18n="menu_title">Denizde Lezzetli<br>Bir Mola</h2>
+  <p class="section-desc" data-i18n="menu_text">Tur sırasında misafirlerimize sunulan taze ve özenle hazırlanmış menülerle keyifli bir deniz deneyimi yaşatıyoruz.</p>
 
   <div class="tours-grid">
     <div class="tour-card">
   <div class="tour-img tour-img-1">
     <img src="menu1.jpg" alt="Balık Menü">
-    <div class="tour-img-label">Menü - 1</div>
+    <div class="tour-img-label" data-i18n="menu1_label">Menü - 1</div>
   </div>
   <div class="tour-body">
-    <div class="tour-name">Balık Menü</div>
-    <p class="tour-desc">
+    <div class="tour-name" data-i18n="menu1_name">Balık Menü</div>
+    <p class="tour-desc" data-i18n="menu1_desc">
       Deniz keyfinize eşlik edecek balık menümüzde patates kızartması, közlenmiş sebzeler, salata çeşitleri, soft içecekler ve günün meyvesi sunulmaktadır.
     </p>
     <div class="tour-meta">
-      <span>🐟 Balık / Fish</span>
-      <span>🍟 Patates Kızartması</span>
-      <span>🥗 Salata & Haydari</span>
-      <span>🥤 Soft İçecekler</span>
-      <span>🍉 Günün Meyvesi</span>
+      <span data-i18n="menu1_m1">🐟 Balık</span>
+      <span data-i18n="menu1_m2">🍟 Patates Kızartması</span>
+      <span data-i18n="menu1_m3">🥗 Salata & Haydari</span>
+      <span data-i18n="menu1_m4">🥤 Soft İçecekler</span>
+      <span data-i18n="menu1_m5">🍉 Günün Meyvesi</span>
     </div>
     <!-- 
     <div class="tour-price">
@@ -772,19 +865,19 @@
 <div class="tour-card">
   <div class="tour-img tour-img-2">
     <img src="menu2.jpg" alt="Tavuk & Köfte Menü">
-    <div class="tour-img-label">Menü - 2</div>
+    <div class="tour-img-label" data-i18n="menu2_label">Menü - 2</div>
   </div>
   <div class="tour-body">
-    <div class="tour-name">Tavuk & Köfte Menü</div>
-    <p class="tour-desc">
+    <div class="tour-name" data-i18n="menu2_name">Tavuk & Köfte Menü</div>
+    <p class="tour-desc" data-i18n="menu2_desc">
       Tavuk ve köfte seçenekli menümüzde makarna, közlenmiş sebzeler, salata çeşitleri, soft içecekler ve günün meyvesi ile doyurucu bir lezzet molası sunulmaktadır.
     </p>
     <div class="tour-meta">
-      <span>🍗 Tavuk & Köfte</span>
-      <span>🍝 Makarna / Pasta</span>
-      <span>🥗 Salata & Haydari</span>
-      <span>🥤 Soft İçecekler</span>
-      <span>🍉 Günün Meyvesi</span>
+      <span data-i18n="menu2_m1">🍗 Tavuk & Köfte</span>
+      <span data-i18n="menu2_m2">🍝 Makarna</span>
+      <span data-i18n="menu2_m3">🥗 Salata & Haydari</span>
+      <span data-i18n="menu2_m4">🥤 Soft İçecekler</span>
+      <span data-i18n="menu2_m5">🍉 Günün Meyvesi</span>
     </div>
     <!--  
     <div class="tour-price">
@@ -810,35 +903,35 @@
       </div>
     </div>
     <div>
-      <span class="section-tag">Neden Biz?</span>
-      <h2 class="section-title">Güvenli, Keyifli,<br>Unutulmaz</h2>
+      <span class="section-tag" data-i18n="why_tag">Neden Biz?</span>
+      <h2 class="section-title" data-i18n="why_title">Güvenli, Keyifli,<br>Unutulmaz</h2>
       <div class="features-list" style="margin-top: 2rem;">
         <div class="feature-item">
           <div class="feature-icon">⚓</div>
           <div class="feature-text">
-            <h4>Deneyimli Kaptan</h4>
-            <p>Çağlar Reis, yıllarca Antalya sularında güvenli ve keyifli turlar düzenlemektedir.</p>
+            <h4 data-i18n="f1_h">Deneyimli Kaptan</h4>
+            <p data-i18n="f1_p">Çağlar Reis, yıllarca Antalya sularında güvenli ve keyifli turlar düzenlemektedir.</p>
           </div>
         </div>
         <div class="feature-item">
           <div class="feature-icon">🛡️</div>
           <div class="feature-text">
-            <h4>Güvenlik Önceliğimiz</h4>
-            <p>Teknemiz tüm denizcilik güvenlik standartlarına uygundur, can yelekleri ve ekipmanlar eksiksizdir.</p>
+            <h4 data-i18n="f2_h">Güvenlik Önceliğimiz</h4>
+            <p data-i18n="f2_p">Teknemiz tüm denizcilik güvenlik standartlarına uygundur, can yelekleri ve ekipmanlar eksiksizdir.</p>
           </div>
         </div>
         <div class="feature-item">
           <div class="feature-icon">🏖️</div>
           <div class="feature-text">
-            <h4>Gizli Koylar</h4>
-            <p>Sadece denizden ulaşılabilen saklı koyları ve berrak suları sizinle keşfediyoruz.</p>
+            <h4 data-i18n="f3_h">Gizli Koylar</h4>
+            <p data-i18n="f3_p">Sadece denizden ulaşılabilen saklı koyları ve berrak suları sizinle keşfediyoruz.</p>
           </div>
         </div>
         <div class="feature-item">
           <div class="feature-icon">🍋</div>
           <div class="feature-text">
-            <h4>Taze İkramlar</h4>
-            <p>Her turda taze meyve, içecek ve ev yapımı atıştırmalıklar ikram edilmektedir.</p>
+            <h4 data-i18n="f4_h">Taze İkramlar</h4>
+            <p data-i18n="f4_p">Her turda taze meyve, içecek ve ev yapımı atıştırmalıklar ikram edilmektedir.</p>
           </div>
         </div>
       </div>
@@ -849,15 +942,15 @@
 <div id="iletisim" style="background: var(--navy);">
 <div class="contact-wrap">
   <div class="contact-left">
-    <span class="section-tag" style="color: var(--turquoise);">Rezervasyon & İletişim</span>
-    <h2 class="section-title">Yerinizi Hemen<br>Ayırtın</h2>
-    <p class="section-desc">Sorularınız için arayabilir ya da WhatsApp'tan ulaşabilirsiniz. Hızlı dönüş garantisi.</p>
+    <span class="section-tag" style="color: var(--turquoise);" data-i18n="contact_tag">Rezervasyon & İletişim</span>
+    <h2 class="section-title" data-i18n="contact_title">Yerinizi Hemen<br>Ayırtın</h2>
+    <p class="section-desc" data-i18n="contact_text">Sorularınız için arayabilir ya da WhatsApp'tan ulaşabilirsiniz. Hızlı dönüş garantisi.</p>
     <div class="contact-cards">
 
   <div class="contact-card">
     <div class="contact-card-icon wa-icon">💬</div>
     <div class="contact-card-info">
-      <h4>WhatsApp</h4>
+      <h4 data-i18n="contact_wa">WhatsApp</h4>
 
       <a href="https://wa.me/905448020266" target="_blank" class="contact-number">
         +90 544 802 02 66
@@ -872,7 +965,7 @@
   <div class="contact-card">
     <div class="contact-card-icon tel-icon">📞</div>
     <div class="contact-card-info">
-      <h4>Telefon</h4>
+      <h4 data-i18n="contact_tel">Telefon</h4>
 
       <a href="tel:+905448020266" class="contact-number">
         +90 544 802 02 66
@@ -887,13 +980,13 @@
 </div>
   </div>
   <div class="contact-right">
-    <h3>Mesaj Gönderin</h3>
+    <h3 data-i18n="contact_form_title">Mesaj Gönderin</h3>
     <div class="form-group">
-      <label>Adınız Soyadınız</label>
-      <input type="text" placeholder="Ad Soyad">
+      <label data-i18n="name_label">Adınız Soyadınız</label>
+      <input type="text" placeholder="Ad Soyad" data-i18n-placeholder="ph_name">
     </div>
     <div class="form-group">
-      <label>Telefon Numaranız</label>
+      <label data-i18n="phone_label">Telefon Numaranız</label>
       <input type="tel" placeholder="+90 5xx xxx xx xx">
     </div>
     <!--    
@@ -908,25 +1001,298 @@
     </div>
     -->
     <div class="form-group">
-      <label>Mesajınız</label>
-      <textarea placeholder="Tarih, kişi sayısı veya sorularınız..."></textarea>
+      <label data-i18n="msg_label">Mesajınız</label>
+      <textarea placeholder="Tarih, kişi sayısı veya sorularınız..." data-i18n-placeholder="ph_msg"></textarea>
     </div>
-    <button class="form-submit" onclick="handleSubmit()">Gönder →</button>
+    <button class="form-submit" onclick="handleSubmit(this)" data-i18n="contact_send">Gönder →</button>
   </div>
 </div>
 </div>
 
 <footer>
-  <p>© 2026 <span>Çağlar Reis Tekne Turu</span> · Antalya, Kundu · Tüm Hakları Saklıdır</p>
+  <p data-i18n="footer">© 2026 <span>Çağlar Reis Tekne Turu</span> · Antalya, Kundu · Tüm Hakları Saklıdır</p>
 </footer>
 
 <script>
-function handleSubmit() {
-  const btn = document.querySelector('.form-submit');
-  btn.textContent = '✓ Mesajınız iletildi!';
+const I18N = {
+  tr: {
+    title: `Çağlar Reis Tekne Turu`,
+    nav_tours: `Turlar`, nav_about: `Hakkımızda`, nav_contact: `İletişim`,
+    hero_badge: `Antalya · Akdeniz`,
+    hero_title: `Masmavi <em>Antalya</em>'yı<br>Denizden Keşfet`,
+    hero_sub: `Çağlar Reis ile unutulmaz bir tekne turu deneyimi sizi bekliyor.`,
+    hero_btn_route: `🚢 Rotayı Gör`, hero_btn_book: `📞 Rezervasyon`,
+    welcome_tag: `Hoş Geldiniz`,
+    welcome_title: `Denizin Büyüsüne<br>Hoş Geldiniz!`,
+    welcome_text: `Antalya Sea Lux, deniz tutkusunu en özel anlarınızla buluşturan bir adrestir. Lüks ve konforun denizle buluştuğu bu yolculukta, her anınızı unutulmaz kılmak için buradayız. Denizin mavisiyle çevrili bu serüvende, VIP hizmetimizle sizi ağırlamaktan mutluluk duyarız. Hayallerinizin ötesinde bir deniz deneyimi için adım atın ve bizimle beraber unutulmaz anılar biriktirin. Antalya Sea Lux ailesine katılmak için şimdi iletişime geçin!`,
+    quick_title: `Hızlı İletişim`,
+    quick_text: `Rezervasyon ve detaylı bilgi için bize hemen ulaşabilirsiniz.`,
+    name_label: `Adınız Soyadınız`, ph_name: `Ad Soyad`,
+    phone_label: `Telefon Numaranız`, msg_label: `Mesajınız`,
+    ph_msg: `Tarih, kişi sayısı veya sorularınız...`,
+    quick_send: `Mesaj Gönder →`, quick_call: `📞 Ara`,
+    route_tag: `Tur Rotası`, route_title: `Tur Rotamız`,
+    route_text: `Aksu Çayı'ndan başlayan turumuzda Düden Şelalesi, Yapay Şelale, Küçük Şelale, Kuş Mağarası ve Dilek Taşı rotalarını ziyaret ediyoruz. Şelale yanında yüzme molası ve yemek molası veriyoruz. Ayrıca uygun koşullarda caretta carettalarla yüzme imkânı da sunulmaktadır.`,
+    stat_label: `Kalkış Noktası`,
+    gallery_tag: `Galeri`, gallery_title: `Denizden<br>Unutulmaz Kareler`,
+    gallery_text: `Çağlar Reis tekne turlarından manzaralar, koylar ve keyifli anlardan birkaç kare.`,
+    menu_tag: `Menü`, menu_title: `Denizde Lezzetli<br>Bir Mola`,
+    menu_text: `Tur sırasında misafirlerimize sunulan taze ve özenle hazırlanmış menülerle keyifli bir deniz deneyimi yaşatıyoruz.`,
+    menu1_label: `Menü - 1`, menu1_name: `Balık Menü`,
+    menu1_desc: `Deniz keyfinize eşlik edecek balık menümüzde patates kızartması, közlenmiş sebzeler, salata çeşitleri, soft içecekler ve günün meyvesi sunulmaktadır.`,
+    menu1_m1: `🐟 Balık`, menu1_m2: `🍟 Patates Kızartması`, menu1_m3: `🥗 Salata & Haydari`, menu1_m4: `🥤 Soft İçecekler`, menu1_m5: `🍉 Günün Meyvesi`,
+    menu2_label: `Menü - 2`, menu2_name: `Tavuk & Köfte Menü`,
+    menu2_desc: `Tavuk ve köfte seçenekli menümüzde makarna, közlenmiş sebzeler, salata çeşitleri, soft içecekler ve günün meyvesi ile doyurucu bir lezzet molası sunulmaktadır.`,
+    menu2_m1: `🍗 Tavuk & Köfte`, menu2_m2: `🍝 Makarna`, menu2_m3: `🥗 Salata & Haydari`, menu2_m4: `🥤 Soft İçecekler`, menu2_m5: `🍉 Günün Meyvesi`,
+    why_tag: `Neden Biz?`, why_title: `Güvenli, Keyifli,<br>Unutulmaz`,
+    f1_h: `Deneyimli Kaptan`, f1_p: `Çağlar Reis, yıllarca Antalya sularında güvenli ve keyifli turlar düzenlemektedir.`,
+    f2_h: `Güvenlik Önceliğimiz`, f2_p: `Teknemiz tüm denizcilik güvenlik standartlarına uygundur, can yelekleri ve ekipmanlar eksiksizdir.`,
+    f3_h: `Gizli Koylar`, f3_p: `Sadece denizden ulaşılabilen saklı koyları ve berrak suları sizinle keşfediyoruz.`,
+    f4_h: `Taze İkramlar`, f4_p: `Her turda taze meyve, içecek ve ev yapımı atıştırmalıklar ikram edilmektedir.`,
+    contact_tag: `Rezervasyon & İletişim`, contact_title: `Yerinizi Hemen<br>Ayırtın`,
+    contact_text: `Sorularınız için arayabilir ya da WhatsApp'tan ulaşabilirsiniz. Hızlı dönüş garantisi.`,
+    contact_wa: `WhatsApp`, contact_tel: `Telefon`,
+    contact_form_title: `Mesaj Gönderin`, contact_send: `Gönder →`,
+    footer: `© 2026 <span>Çağlar Reis Tekne Turu</span> · Antalya, Kundu · Tüm Hakları Saklıdır`,
+    form_sent: `✓ Mesajınız iletildi!`
+  },
+  en: {
+    title: `Çağlar Reis Boat Tour`,
+    nav_tours: `Tours`, nav_about: `About`, nav_contact: `Contact`,
+    hero_badge: `Antalya · Mediterranean`,
+    hero_title: `Discover <em>Antalya</em>'s<br>Deep Blue by Sea`,
+    hero_sub: `An unforgettable boat tour experience awaits you with Çağlar Reis.`,
+    hero_btn_route: `🚢 View Route`, hero_btn_book: `📞 Reservation`,
+    welcome_tag: `Welcome`,
+    welcome_title: `Welcome to the<br>Magic of the Sea!`,
+    welcome_text: `Antalya Sea Lux is where a passion for the sea meets your most special moments. On this journey where luxury and comfort meet the sea, we are here to make every moment unforgettable. In this adventure surrounded by the blue of the sea, we are delighted to host you with our VIP service. Take a step toward a sea experience beyond your dreams and collect unforgettable memories with us. Get in touch now to join the Antalya Sea Lux family!`,
+    quick_title: `Quick Contact`,
+    quick_text: `Reach us right away for reservations and detailed information.`,
+    name_label: `Your Full Name`, ph_name: `Full Name`,
+    phone_label: `Your Phone Number`, msg_label: `Your Message`,
+    ph_msg: `Date, number of guests or your questions...`,
+    quick_send: `Send Message →`, quick_call: `📞 Call`,
+    route_tag: `Tour Route`, route_title: `Our Tour Route`,
+    route_text: `Starting from the Aksu River, our tour visits the Düden Waterfall, the Artificial Waterfall, the Small Waterfall, the Bird Cave and the Wish Stone. We take a swimming break and a meal break by the waterfall. Under suitable conditions, swimming with sea turtles (caretta caretta) is also offered.`,
+    stat_label: `Departure Point`,
+    gallery_tag: `Gallery`, gallery_title: `Unforgettable Moments<br>from the Sea`,
+    gallery_text: `A few shots of the views, bays and joyful moments from Çağlar Reis boat tours.`,
+    menu_tag: `Menu`, menu_title: `A Delicious Break<br>at Sea`,
+    menu_text: `We offer a pleasant sea experience with fresh, carefully prepared menus served to our guests during the tour.`,
+    menu1_label: `Menu - 1`, menu1_name: `Fish Menu`,
+    menu1_desc: `Our fish menu, accompanying your time at sea, includes french fries, grilled vegetables, a variety of salads, soft drinks and the fruit of the day.`,
+    menu1_m1: `🐟 Fish`, menu1_m2: `🍟 French Fries`, menu1_m3: `🥗 Salad & Haydari`, menu1_m4: `🥤 Soft Drinks`, menu1_m5: `🍉 Fruit of the Day`,
+    menu2_label: `Menu - 2`, menu2_name: `Chicken & Meatball Menu`,
+    menu2_desc: `Our menu with chicken and meatball options offers a filling, tasty break with pasta, grilled vegetables, a variety of salads, soft drinks and the fruit of the day.`,
+    menu2_m1: `🍗 Chicken & Meatballs`, menu2_m2: `🍝 Pasta`, menu2_m3: `🥗 Salad & Haydari`, menu2_m4: `🥤 Soft Drinks`, menu2_m5: `🍉 Fruit of the Day`,
+    why_tag: `Why Us?`, why_title: `Safe, Enjoyable,<br>Unforgettable`,
+    f1_h: `Experienced Captain`, f1_p: `Çağlar Reis has organized safe and enjoyable tours in Antalya's waters for years.`,
+    f2_h: `Safety First`, f2_p: `Our boat complies with all maritime safety standards; life jackets and equipment are complete.`,
+    f3_h: `Hidden Bays`, f3_p: `We explore secret bays and crystal-clear waters reachable only by sea, together with you.`,
+    f4_h: `Fresh Treats`, f4_p: `Fresh fruit, drinks and homemade snacks are served on every tour.`,
+    contact_tag: `Reservation & Contact`, contact_title: `Reserve Your<br>Spot Now`,
+    contact_text: `You can call us or reach us via WhatsApp for your questions. Quick response guaranteed.`,
+    contact_wa: `WhatsApp`, contact_tel: `Phone`,
+    contact_form_title: `Send a Message`, contact_send: `Send →`,
+    footer: `© 2026 <span>Çağlar Reis Boat Tour</span> · Antalya, Kundu · All Rights Reserved`,
+    form_sent: `✓ Your message has been sent!`
+  },
+  ru: {
+    title: `Лодочный тур Çağlar Reis`,
+    nav_tours: `Туры`, nav_about: `О нас`, nav_contact: `Контакты`,
+    hero_badge: `Анталья · Средиземное море`,
+    hero_title: `Откройте лазурную<br><em>Анталью</em> с моря`,
+    hero_sub: `Незабываемый морской тур ждёт вас вместе с Çağlar Reis.`,
+    hero_btn_route: `🚢 Маршрут`, hero_btn_book: `📞 Бронирование`,
+    welcome_tag: `Добро пожаловать`,
+    welcome_title: `Добро пожаловать<br>в магию моря!`,
+    welcome_text: `Antalya Sea Lux — это место, где страсть к морю встречается с вашими особенными моментами. В этом путешествии, где роскошь и комфорт сочетаются с морем, мы здесь, чтобы сделать каждое мгновение незабываемым. В этом приключении, окружённом морской синевой, мы с радостью примем вас с нашим VIP-сервисом. Сделайте шаг навстречу морскому отдыху сверх ваших мечтаний и соберите вместе с нами незабываемые воспоминания. Свяжитесь с нами прямо сейчас, чтобы присоединиться к семье Antalya Sea Lux!`,
+    quick_title: `Быстрая связь`,
+    quick_text: `Свяжитесь с нами прямо сейчас для бронирования и подробной информации.`,
+    name_label: `Ваше имя и фамилия`, ph_name: `Имя Фамилия`,
+    phone_label: `Ваш номер телефона`, msg_label: `Ваше сообщение`,
+    ph_msg: `Дата, количество гостей или ваши вопросы...`,
+    quick_send: `Отправить →`, quick_call: `📞 Позвонить`,
+    route_tag: `Маршрут тура`, route_title: `Наш маршрут`,
+    route_text: `Наш тур начинается от реки Аксу и проходит к водопаду Дюден, Искусственному водопаду, Малому водопаду, Птичьей пещере и Камню желаний. У водопада мы делаем остановку для купания и обеда. При подходящих условиях также предлагается плавание с морскими черепахами (каретта-каретта).`,
+    stat_label: `Точка отправления`,
+    gallery_tag: `Галерея`, gallery_title: `Незабываемые<br>морские кадры`,
+    gallery_text: `Несколько кадров с видами, бухтами и приятными моментами из лодочных туров Çağlar Reis.`,
+    menu_tag: `Меню`, menu_title: `Вкусная пауза<br>в море`,
+    menu_text: `Во время тура мы дарим приятные морские впечатления со свежими и тщательно приготовленными меню для наших гостей.`,
+    menu1_label: `Меню - 1`, menu1_name: `Рыбное меню`,
+    menu1_desc: `Наше рыбное меню для вашего морского отдыха включает картофель фри, овощи на гриле, разнообразные салаты, безалкогольные напитки и фрукт дня.`,
+    menu1_m1: `🐟 Рыба`, menu1_m2: `🍟 Картофель фри`, menu1_m3: `🥗 Салат и хайдари`, menu1_m4: `🥤 Напитки`, menu1_m5: `🍉 Фрукт дня`,
+    menu2_label: `Меню - 2`, menu2_name: `Курица и котлеты`,
+    menu2_desc: `Наше меню с курицей и котлетами предлагает сытную и вкусную паузу с макаронами, овощами на гриле, разнообразными салатами, напитками и фруктом дня.`,
+    menu2_m1: `🍗 Курица и котлеты`, menu2_m2: `🍝 Макароны`, menu2_m3: `🥗 Салат и хайдари`, menu2_m4: `🥤 Напитки`, menu2_m5: `🍉 Фрукт дня`,
+    why_tag: `Почему мы?`, why_title: `Безопасно, приятно,<br>незабываемо`,
+    f1_h: `Опытный капитан`, f1_p: `Çağlar Reis много лет проводит безопасные и приятные туры в водах Антальи.`,
+    f2_h: `Безопасность прежде всего`, f2_p: `Наша лодка соответствует всем морским стандартам безопасности; спасательные жилеты и оборудование в полном комплекте.`,
+    f3_h: `Скрытые бухты`, f3_p: `Вместе с вами мы открываем скрытые бухты и кристально чистые воды, доступные только с моря.`,
+    f4_h: `Свежие угощения`, f4_p: `На каждом туре подаются свежие фрукты, напитки и домашние закуски.`,
+    contact_tag: `Бронирование и контакты`, contact_title: `Забронируйте<br>место сейчас`,
+    contact_text: `Вы можете позвонить нам или связаться через WhatsApp по любым вопросам. Гарантируем быстрый ответ.`,
+    contact_wa: `WhatsApp`, contact_tel: `Телефон`,
+    contact_form_title: `Отправьте сообщение`, contact_send: `Отправить →`,
+    footer: `© 2026 <span>Çağlar Reis · Лодочный тур</span> · Анталья, Кунду · Все права защищены`,
+    form_sent: `✓ Ваше сообщение отправлено!`
+  },
+  de: {
+    title: `Çağlar Reis Bootstour`,
+    nav_tours: `Touren`, nav_about: `Über uns`, nav_contact: `Kontakt`,
+    hero_badge: `Antalya · Mittelmeer`,
+    hero_title: `Entdecke das tiefblaue<br><em>Antalya</em> vom Meer aus`,
+    hero_sub: `Mit Çağlar Reis erwartet Sie ein unvergessliches Bootstour-Erlebnis.`,
+    hero_btn_route: `🚢 Route ansehen`, hero_btn_book: `📞 Reservierung`,
+    welcome_tag: `Willkommen`,
+    welcome_title: `Willkommen im<br>Zauber des Meeres!`,
+    welcome_text: `Antalya Sea Lux ist der Ort, an dem die Leidenschaft für das Meer auf Ihre besonderen Momente trifft. Auf dieser Reise, bei der Luxus und Komfort auf das Meer treffen, sind wir hier, um jeden Moment unvergesslich zu machen. Auf diesem von Meeresblau umgebenen Abenteuer empfangen wir Sie mit Freude mit unserem VIP-Service. Machen Sie den Schritt zu einem Meereserlebnis jenseits Ihrer Träume und sammeln Sie mit uns unvergessliche Erinnerungen. Kontaktieren Sie uns jetzt, um Teil der Antalya-Sea-Lux-Familie zu werden!`,
+    quick_title: `Schnellkontakt`,
+    quick_text: `Für Reservierungen und ausführliche Informationen erreichen Sie uns sofort.`,
+    name_label: `Ihr vollständiger Name`, ph_name: `Vor- und Nachname`,
+    phone_label: `Ihre Telefonnummer`, msg_label: `Ihre Nachricht`,
+    ph_msg: `Datum, Personenzahl oder Ihre Fragen...`,
+    quick_send: `Nachricht senden →`, quick_call: `📞 Anrufen`,
+    route_tag: `Tourroute`, route_title: `Unsere Tourroute`,
+    route_text: `Unsere Tour beginnt am Fluss Aksu und führt zum Düden-Wasserfall, zum künstlichen Wasserfall, zum kleinen Wasserfall, zur Vogelhöhle und zum Wunschstein. Am Wasserfall machen wir eine Bade- und eine Essenspause. Unter geeigneten Bedingungen wird auch das Schwimmen mit Meeresschildkröten (Caretta Caretta) angeboten.`,
+    stat_label: `Abfahrtsort`,
+    gallery_tag: `Galerie`, gallery_title: `Unvergessliche<br>Momente auf See`,
+    gallery_text: `Einige Aufnahmen von Ausblicken, Buchten und schönen Momenten aus den Bootstouren von Çağlar Reis.`,
+    menu_tag: `Menü`, menu_title: `Eine leckere<br>Pause auf See`,
+    menu_text: `Während der Tour bieten wir unseren Gästen mit frischen, sorgfältig zubereiteten Menüs ein angenehmes Meereserlebnis.`,
+    menu1_label: `Menü - 1`, menu1_name: `Fischmenü`,
+    menu1_desc: `Unser Fischmenü, das Ihren Tag auf See begleitet, umfasst Pommes frites, gegrilltes Gemüse, verschiedene Salate, alkoholfreie Getränke und die Frucht des Tages.`,
+    menu1_m1: `🐟 Fisch`, menu1_m2: `🍟 Pommes frites`, menu1_m3: `🥗 Salat & Haydari`, menu1_m4: `🥤 Erfrischungsgetränke`, menu1_m5: `🍉 Frucht des Tages`,
+    menu2_label: `Menü - 2`, menu2_name: `Hähnchen & Frikadellen`,
+    menu2_desc: `Unser Menü mit Hähnchen und Frikadellen bietet eine sättigende, leckere Pause mit Nudeln, gegrilltem Gemüse, verschiedenen Salaten, alkoholfreien Getränken und der Frucht des Tages.`,
+    menu2_m1: `🍗 Hähnchen & Frikadellen`, menu2_m2: `🍝 Nudeln`, menu2_m3: `🥗 Salat & Haydari`, menu2_m4: `🥤 Erfrischungsgetränke`, menu2_m5: `🍉 Frucht des Tages`,
+    why_tag: `Warum wir?`, why_title: `Sicher, angenehm,<br>unvergesslich`,
+    f1_h: `Erfahrener Kapitän`, f1_p: `Çağlar Reis organisiert seit Jahren sichere und angenehme Touren in den Gewässern von Antalya.`,
+    f2_h: `Sicherheit zuerst`, f2_p: `Unser Boot entspricht allen Sicherheitsstandards der Seefahrt; Rettungswesten und Ausrüstung sind vollständig.`,
+    f3_h: `Versteckte Buchten`, f3_p: `Gemeinsam mit Ihnen entdecken wir versteckte Buchten und kristallklares Wasser, das nur vom Meer aus erreichbar ist.`,
+    f4_h: `Frische Köstlichkeiten`, f4_p: `Bei jeder Tour werden frisches Obst, Getränke und hausgemachte Snacks serviert.`,
+    contact_tag: `Reservierung & Kontakt`, contact_title: `Sichern Sie sich<br>jetzt Ihren Platz`,
+    contact_text: `Bei Fragen können Sie uns anrufen oder über WhatsApp erreichen. Schnelle Rückmeldung garantiert.`,
+    contact_wa: `WhatsApp`, contact_tel: `Telefon`,
+    contact_form_title: `Nachricht senden`, contact_send: `Senden →`,
+    footer: `© 2026 <span>Çağlar Reis Bootstour</span> · Antalya, Kundu · Alle Rechte vorbehalten`,
+    form_sent: `✓ Ihre Nachricht wurde gesendet!`
+  },
+  ar: {
+    title: `جولة قارب Çağlar Reis`,
+    nav_tours: `الجولات`, nav_about: `من نحن`, nav_contact: `اتصل بنا`,
+    hero_badge: `أنطاليا · البحر المتوسط`,
+    hero_title: `اكتشف <em>أنطاليا</em><br>الزرقاء من البحر`,
+    hero_sub: `تجربة جولة بحرية لا تُنسى بانتظارك مع Çağlar Reis.`,
+    hero_btn_route: `🚢 عرض المسار`, hero_btn_book: `📞 الحجز`,
+    welcome_tag: `أهلاً وسهلاً`,
+    welcome_title: `أهلاً بك في<br>سحر البحر!`,
+    welcome_text: `Antalya Sea Lux هو المكان الذي يلتقي فيه شغف البحر بأجمل لحظاتك. في هذه الرحلة التي تلتقي فيها الفخامة والراحة بالبحر، نحن هنا لنجعل كل لحظة لا تُنسى. في هذه المغامرة المُحاطة بزرقة البحر، يسعدنا استقبالك بخدمتنا المميزة (VIP). اتخذ خطوة نحو تجربة بحرية تفوق أحلامك واجمع معنا ذكريات لا تُنسى. تواصل معنا الآن للانضمام إلى عائلة Antalya Sea Lux!`,
+    quick_title: `تواصل سريع`,
+    quick_text: `يمكنك التواصل معنا فوراً للحجز والحصول على معلومات مفصلة.`,
+    name_label: `الاسم الكامل`, ph_name: `الاسم الكامل`,
+    phone_label: `رقم هاتفك`, msg_label: `رسالتك`,
+    ph_msg: `التاريخ وعدد الأشخاص أو أسئلتك...`,
+    quick_send: `إرسال الرسالة →`, quick_call: `📞 اتصل`,
+    route_tag: `مسار الجولة`, route_title: `مسار جولتنا`,
+    route_text: `تبدأ جولتنا من نهر أكسو وتزور شلال دودان والشلال الاصطناعي والشلال الصغير وكهف الطيور وحجر الأمنيات. نتوقف بجانب الشلال للسباحة وتناول الطعام. وفي الظروف المناسبة، تتوفر أيضاً إمكانية السباحة مع السلاحف البحرية (كاريتا كاريتا).`,
+    stat_label: `نقطة الانطلاق`,
+    gallery_tag: `المعرض`, gallery_title: `لحظات بحرية<br>لا تُنسى`,
+    gallery_text: `بعض اللقطات للمناظر والخلجان واللحظات الممتعة من جولات قوارب Çağlar Reis.`,
+    menu_tag: `القائمة`, menu_title: `استراحة لذيذة<br>في البحر`,
+    menu_text: `خلال الجولة، نقدم لضيوفنا تجربة بحرية ممتعة مع قوائم طازجة ومُعدّة بعناية.`,
+    menu1_label: `القائمة - 1`, menu1_name: `قائمة السمك`,
+    menu1_desc: `تشمل قائمة السمك التي ترافق متعتك البحرية البطاطس المقلية والخضار المشوية وأنواع السلطات والمشروبات الغازية وفاكهة اليوم.`,
+    menu1_m1: `🐟 سمك`, menu1_m2: `🍟 بطاطس مقلية`, menu1_m3: `🥗 سلطة وحيدري`, menu1_m4: `🥤 مشروبات غازية`, menu1_m5: `🍉 فاكهة اليوم`,
+    menu2_label: `القائمة - 2`, menu2_name: `دجاج وكفتة`,
+    menu2_desc: `تقدم قائمتنا بخيار الدجاج والكفتة استراحة لذيذة ومُشبعة مع المعكرونة والخضار المشوية وأنواع السلطات والمشروبات الغازية وفاكهة اليوم.`,
+    menu2_m1: `🍗 دجاج وكفتة`, menu2_m2: `🍝 معكرونة`, menu2_m3: `🥗 سلطة وحيدري`, menu2_m4: `🥤 مشروبات غازية`, menu2_m5: `🍉 فاكهة اليوم`,
+    why_tag: `لماذا نحن؟`, why_title: `آمنة وممتعة<br>ولا تُنسى`,
+    f1_h: `قبطان ذو خبرة`, f1_p: `يُنظّم Çağlar Reis منذ سنوات جولات آمنة وممتعة في مياه أنطاليا.`,
+    f2_h: `السلامة أولاً`, f2_p: `قاربنا يتوافق مع جميع معايير السلامة البحرية، وسترات النجاة والمعدات كاملة.`,
+    f3_h: `خلجان مخفية`, f3_p: `نكتشف معك الخلجان السرية والمياه الصافية التي لا يمكن الوصول إليها إلا من البحر.`,
+    f4_h: `ضيافة طازجة`, f4_p: `تُقدّم في كل جولة فواكه طازجة ومشروبات ووجبات خفيفة منزلية الصنع.`,
+    contact_tag: `الحجز والتواصل`, contact_title: `احجز مكانك<br>الآن`,
+    contact_text: `يمكنك الاتصال بنا أو التواصل عبر واتساب لأي استفسار. نضمن لك رداً سريعاً.`,
+    contact_wa: `واتساب`, contact_tel: `هاتف`,
+    contact_form_title: `أرسل رسالة`, contact_send: `إرسال →`,
+    footer: `© 2026 <span>جولة قارب Çağlar Reis</span> · أنطاليا، كوندو · جميع الحقوق محفوظة`,
+    form_sent: `✓ تم إرسال رسالتك!`
+  }
+};
+
+const SUPPORTED = ['tr', 'en', 'ru', 'de', 'ar'];
+const RTL_LANGS = ['ar'];
+let currentLang = 'tr';
+
+function t(key) {
+  const dict = I18N[currentLang] || I18N.tr;
+  return dict[key] != null ? dict[key] : (I18N.tr[key] || '');
+}
+
+function applyLang(lang) {
+  if (!SUPPORTED.includes(lang)) lang = 'tr';
+  currentLang = lang;
+  const dict = I18N[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = RTL_LANGS.includes(lang) ? 'rtl' : 'ltr';
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = dict[el.getAttribute('data-i18n')];
+    if (v != null) el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const v = dict[el.getAttribute('data-i18n-placeholder')];
+    if (v != null) el.setAttribute('placeholder', v);
+  });
+
+  if (dict.title) document.title = dict.title;
+  const codeEl = document.querySelector('.lang-current-code');
+  if (codeEl) codeEl.textContent = lang.toUpperCase();
+  document.querySelectorAll('.lang-menu button').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  try { localStorage.setItem('lang', lang); } catch (e) {}
+}
+
+function initLang() {
+  let lang;
+  try { lang = localStorage.getItem('lang'); } catch (e) {}
+  if (!lang) {
+    const nav = (navigator.language || 'tr').slice(0, 2).toLowerCase();
+    lang = SUPPORTED.includes(nav) ? nav : 'tr';
+  }
+  applyLang(lang);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initLang();
+
+  const switcher = document.querySelector('.lang-switcher');
+  const toggle = document.querySelector('.lang-current');
+  if (toggle && switcher) {
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      switcher.classList.toggle('open');
+    });
+    document.querySelectorAll('.lang-menu button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        applyLang(btn.getAttribute('data-lang'));
+        switcher.classList.remove('open');
+      });
+    });
+    document.addEventListener('click', () => switcher.classList.remove('open'));
+  }
+});
+
+function handleSubmit(btn) {
+  if (!btn) btn = document.querySelector('.form-submit');
+  const original = btn.innerHTML;
+  btn.textContent = t('form_sent');
   btn.style.background = '#0e8c7a';
   setTimeout(() => {
-    btn.textContent = 'Gönder →';
+    btn.innerHTML = original;
     btn.style.background = '';
   }, 3000);
 }
