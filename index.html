@@ -746,22 +746,29 @@
   <h3 data-i18n="quick_title">Hızlı İletişim</h3>
   <p data-i18n="quick_text">Rezervasyon ve detaylı bilgi için bize hemen ulaşabilirsiniz.</p>
 
-  <div class="quick-form-group">
-    <label data-i18n="name_label">Adınız Soyadınız</label>
-    <input type="text" placeholder="Ad Soyad" data-i18n-placeholder="ph_name">
-  </div>
+  <form class="contact-form">
+    <input type="hidden" name="access_key" value="2472011c-0fce-40a6-8292-1906816f64b3">
+    <input type="hidden" name="subject" value="Çağlar Reis — Hızlı İletişim Formu">
+    <input type="hidden" name="from_name" value="Çağlar Reis Web Sitesi">
+    <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
 
-  <div class="quick-form-group">
-    <label data-i18n="phone_label">Telefon Numaranız</label>
-    <input type="tel" placeholder="+90 5xx xxx xx xx">
-  </div>
+    <div class="quick-form-group">
+      <label data-i18n="name_label">Adınız Soyadınız</label>
+      <input type="text" name="name" placeholder="Ad Soyad" data-i18n-placeholder="ph_name" required>
+    </div>
 
-  <div class="quick-form-group">
-    <label data-i18n="msg_label">Mesajınız</label>
-    <textarea placeholder="Tarih, kişi sayısı veya sorularınız..." data-i18n-placeholder="ph_msg"></textarea>
-  </div>
+    <div class="quick-form-group">
+      <label data-i18n="phone_label">Telefon Numaranız</label>
+      <input type="tel" name="phone" placeholder="+90 5xx xxx xx xx" required>
+    </div>
 
-  <button class="quick-submit" onclick="handleSubmit(this)" data-i18n="quick_send">Mesaj Gönder →</button>
+    <div class="quick-form-group">
+      <label data-i18n="msg_label">Mesajınız</label>
+      <textarea name="message" placeholder="Tarih, kişi sayısı veya sorularınız..." data-i18n-placeholder="ph_msg" required></textarea>
+    </div>
+
+    <button type="submit" class="quick-submit" data-i18n="quick_send">Mesaj Gönder →</button>
+  </form>
 
   <div class="quick-contact-buttons">
     <a href="https://wa.me/905448020266" target="_blank" class="quick-contact-btn whatsapp">
@@ -1004,30 +1011,37 @@
   </div>
   <div class="contact-right">
     <h3 data-i18n="contact_form_title">Mesaj Gönderin</h3>
-    <div class="form-group">
-      <label data-i18n="name_label">Adınız Soyadınız</label>
-      <input type="text" placeholder="Ad Soyad" data-i18n-placeholder="ph_name">
-    </div>
-    <div class="form-group">
-      <label data-i18n="phone_label">Telefon Numaranız</label>
-      <input type="tel" placeholder="+90 5xx xxx xx xx">
-    </div>
-    <!--    
-    <div class="form-group">
-      <label>Tur Seçimi</label>
-      <select>
-        <option value="">Tur seçiniz...</option>
-        <option>Sabah Keyfi Turu</option>
-        <option>Tam Gün Mavi Tur</option>
-        <option>Gün Batımı Turu</option>
-      </select>
-    </div>
-    -->
-    <div class="form-group">
-      <label data-i18n="msg_label">Mesajınız</label>
-      <textarea placeholder="Tarih, kişi sayısı veya sorularınız..." data-i18n-placeholder="ph_msg"></textarea>
-    </div>
-    <button class="form-submit" onclick="handleSubmit(this)" data-i18n="contact_send">Gönder →</button>
+    <form class="contact-form">
+      <input type="hidden" name="access_key" value="2472011c-0fce-40a6-8292-1906816f64b3">
+      <input type="hidden" name="subject" value="Çağlar Reis — İletişim Formu">
+      <input type="hidden" name="from_name" value="Çağlar Reis Web Sitesi">
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none">
+
+      <div class="form-group">
+        <label data-i18n="name_label">Adınız Soyadınız</label>
+        <input type="text" name="name" placeholder="Ad Soyad" data-i18n-placeholder="ph_name" required>
+      </div>
+      <div class="form-group">
+        <label data-i18n="phone_label">Telefon Numaranız</label>
+        <input type="tel" name="phone" placeholder="+90 5xx xxx xx xx" required>
+      </div>
+      <!--
+      <div class="form-group">
+        <label>Tur Seçimi</label>
+        <select>
+          <option value="">Tur seçiniz...</option>
+          <option>Sabah Keyfi Turu</option>
+          <option>Tam Gün Mavi Tur</option>
+          <option>Gün Batımı Turu</option>
+        </select>
+      </div>
+      -->
+      <div class="form-group">
+        <label data-i18n="msg_label">Mesajınız</label>
+        <textarea name="message" placeholder="Tarih, kişi sayısı veya sorularınız..." data-i18n-placeholder="ph_msg" required></textarea>
+      </div>
+      <button type="submit" class="form-submit" data-i18n="contact_send">Gönder →</button>
+    </form>
   </div>
 </div>
 </div>
@@ -1079,7 +1093,7 @@ const I18N = {
     contact_wa: `WhatsApp`, contact_tel: `Telefon`,
     contact_form_title: `Mesaj Gönderin`, contact_send: `Gönder →`,
     footer: `© 2026 <span>Çağlar Reis Tekne Turu</span> · Antalya, Kundu · Tüm Hakları Saklıdır`,
-    form_sent: `✓ Mesajınız iletildi!`
+    form_sent: `✓ Mesajınız iletildi!`, form_sending: `Gönderiliyor...`, form_error: `Bir hata oluştu, lütfen tekrar deneyin.`
   },
   en: {
     title: `Çağlar Reis Boat Tour`,
@@ -1122,7 +1136,7 @@ const I18N = {
     contact_wa: `WhatsApp`, contact_tel: `Phone`,
     contact_form_title: `Send a Message`, contact_send: `Send →`,
     footer: `© 2026 <span>Çağlar Reis Boat Tour</span> · Antalya, Kundu · All Rights Reserved`,
-    form_sent: `✓ Your message has been sent!`
+    form_sent: `✓ Your message has been sent!`, form_sending: `Sending...`, form_error: `Something went wrong, please try again.`
   },
   ru: {
     title: `Лодочный тур Çağlar Reis`,
@@ -1165,7 +1179,7 @@ const I18N = {
     contact_wa: `WhatsApp`, contact_tel: `Телефон`,
     contact_form_title: `Отправьте сообщение`, contact_send: `Отправить →`,
     footer: `© 2026 <span>Çağlar Reis · Лодочный тур</span> · Анталья, Кунду · Все права защищены`,
-    form_sent: `✓ Ваше сообщение отправлено!`
+    form_sent: `✓ Ваше сообщение отправлено!`, form_sending: `Отправка...`, form_error: `Произошла ошибка, попробуйте ещё раз.`
   },
   de: {
     title: `Çağlar Reis Bootstour`,
@@ -1208,7 +1222,7 @@ const I18N = {
     contact_wa: `WhatsApp`, contact_tel: `Telefon`,
     contact_form_title: `Nachricht senden`, contact_send: `Senden →`,
     footer: `© 2026 <span>Çağlar Reis Bootstour</span> · Antalya, Kundu · Alle Rechte vorbehalten`,
-    form_sent: `✓ Ihre Nachricht wurde gesendet!`
+    form_sent: `✓ Ihre Nachricht wurde gesendet!`, form_sending: `Wird gesendet...`, form_error: `Etwas ist schiefgelaufen, bitte erneut versuchen.`
   },
   ar: {
     title: `جولة قارب Çağlar Reis`,
@@ -1251,7 +1265,7 @@ const I18N = {
     contact_wa: `واتساب`, contact_tel: `هاتف`,
     contact_form_title: `أرسل رسالة`, contact_send: `إرسال →`,
     footer: `© 2026 <span>جولة قارب Çağlar Reis</span> · أنطاليا، كوندو · جميع الحقوق محفوظة`,
-    form_sent: `✓ تم إرسال رسالتك!`
+    form_sent: `✓ تم إرسال رسالتك!`, form_sending: `جارٍ الإرسال...`, form_error: `حدث خطأ، يرجى المحاولة مرة أخرى.`
   }
 };
 
@@ -1301,6 +1315,7 @@ function initLang() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initLang();
+  wireForms();
 
   const switcher = document.querySelector('.lang-switcher');
   const toggle = document.querySelector('.lang-current');
@@ -1319,15 +1334,45 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-function handleSubmit(btn) {
-  if (!btn) btn = document.querySelector('.form-submit');
+async function sendForm(form) {
+  const btn = form.querySelector('button[type="submit"]');
   const original = btn.innerHTML;
-  btn.textContent = t('form_sent');
-  btn.style.background = '#0e8c7a';
+  btn.disabled = true;
+  btn.style.background = '';
+  btn.textContent = t('form_sending');
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    });
+    const data = await res.json();
+    if (data.success) {
+      btn.textContent = t('form_sent');
+      btn.style.background = '#0e8c7a';
+      form.reset();
+    } else {
+      btn.textContent = t('form_error');
+      btn.style.background = '#c0392b';
+    }
+  } catch (e) {
+    btn.textContent = t('form_error');
+    btn.style.background = '#c0392b';
+  }
   setTimeout(() => {
     btn.innerHTML = original;
     btn.style.background = '';
-  }, 3000);
+    btn.disabled = false;
+  }, 3500);
+}
+
+function wireForms() {
+  document.querySelectorAll('.contact-form').forEach(form => {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      sendForm(form);
+    });
+  });
 }
 </script>
 </body>
