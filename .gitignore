@@ -1,0 +1,3 @@
+# Raw, unoptimized source videos — kept locally only.
+# The web-optimized versions (hero-video*.mp4) are committed instead.
+drone_*.mp4

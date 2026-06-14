@@ -68,15 +68,34 @@
   /* HERO */
   .hero {
     min-height: 100vh;
-    background: linear-gradient(rgba(5,25,45,0.55), rgba(10,42,74,0.45)),
-              url('hero.jpeg') center/cover no-repeat;
+    background: #05192d url('hero.jpeg') center/cover no-repeat;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center; padding: 8rem 2rem 5rem;
     position: relative; overflow: hidden;
   }
+  .hero-video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .hero-video.is-active { opacity: 1; z-index: 1; }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(rgba(5,25,45,0.55), rgba(10,42,74,0.55));
+    z-index: 2;
+  }
+  .hero-badge, .hero h1, .hero-sub, .hero-btns { position: relative; z-index: 3; }
+  .wave-dots { z-index: 3; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video { display: none; }
+  }
   .hero::before {
     content: '';
     position: absolute; bottom: 0; left: 0; right: 0; height: 180px;
+    z-index: 3;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 180'%3E%3Cpath fill='%23f5ede0' fill-opacity='1' d='M0,96L48,106.7C96,117,192,139,288,133.3C384,128,480,96,576,80C672,64,768,64,864,80C960,96,1056,128,1152,133.3C1248,139,1344,117,1392,106.7L1440,96L1440,180L1392,180C1344,180,1248,180,1152,180C1056,180,960,180,864,180C768,180,672,180,576,180C480,180,384,180,288,180C192,180,96,180,48,180L0,180Z'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
     background-size: cover;
   }
@@ -737,6 +756,16 @@
 
 <!-- HERO -->
 <section class="hero">
+  <video class="hero-video is-active" autoplay muted playsinline preload="auto" poster="hero-video-poster.jpg" aria-hidden="true">
+    <source src="hero-video.mp4" type="video/mp4">
+  </video>
+  <video class="hero-video" muted playsinline preload="metadata" poster="hero-video-2-poster.jpg" aria-hidden="true">
+    <source src="hero-video-2.mp4" type="video/mp4">
+  </video>
+  <video class="hero-video" muted playsinline preload="metadata" poster="hero-video-3-poster.jpg" aria-hidden="true">
+    <source src="hero-video-3.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
   <div class="wave-dots">
     <span></span><span></span><span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span><span></span><span></span>
@@ -1350,6 +1379,7 @@ function initLang() {
 document.addEventListener('DOMContentLoaded', () => {
   initLang();
   wireForms();
+  initHeroVideos();
 
   const switcher = document.querySelector('.lang-switcher');
   const toggle = document.querySelector('.lang-current');
@@ -1406,6 +1436,49 @@ function wireForms() {
       e.preventDefault();
       sendForm(form);
     });
+  });
+}
+
+// Cross-fade cycle through the hero background videos
+function initHeroVideos() {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const vids = Array.from(document.querySelectorAll('.hero-video'));
+  const n = vids.length;
+  if (n < 2) return;
+  vids.forEach(v => { v.muted = true; });
+  let current = 0;
+  let switching = false;
+  function preload(i) {
+    const v = vids[i];
+    if (v.preload !== 'auto') { v.preload = 'auto'; try { v.load(); } catch (e) {} }
+  }
+  function go(next) {
+    if (switching || next === current) return;
+    switching = true;
+    const nxt = vids[next];
+    try { nxt.currentTime = 0; } catch (e) {}
+    nxt.play().catch(() => {});
+    nxt.classList.add('is-active');
+    vids[current].classList.remove('is-active');
+    current = next;
+    preload((next + 1) % n);
+    setTimeout(() => { switching = false; }, 1100);
+  }
+  vids.forEach((v, idx) => {
+    v.addEventListener('timeupdate', () => {
+      if (idx === current && v.duration && v.currentTime >= v.duration - 1) {
+        go((idx + 1) % vids.length);
+      }
+    });
+    v.addEventListener('ended', () => {
+      if (idx === current) go((idx + 1) % vids.length);
+    });
+  });
+  // start loading the next clip ahead of time, then play the first
+  preload((current + 1) % n);
+  vids[current].play().catch(() => {});
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) vids[current].play().catch(() => {});
   });
 }
 </script>
