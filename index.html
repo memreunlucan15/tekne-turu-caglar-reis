@@ -440,6 +440,9 @@
     height: 100%;
     object-fit: cover;
   }
+  /* REVIEWS */
+  #yorumlar { background: var(--sand); }
+  .reviews-widget { margin-top: 2.5rem; }
 /* GALLERY */
 #galeri {
   background: var(--sand);
@@ -687,6 +690,7 @@
     <div class="nav-links">
       <a href="#turlar" data-i18n="nav_tours">Turlar</a>
       <a href="#hakkimizda" data-i18n="nav_about">Hakkımızda</a>
+      <a href="#yorumlar" data-i18n="nav_reviews">Yorumlar</a>
       <a href="#iletisim" data-i18n="nav_contact">İletişim</a>
     </div>
     <div class="lang-switcher">
@@ -942,6 +946,21 @@
     </div>
   </div>
 </section>
+</div>
+
+<!-- YORUMLAR -->
+<div id="yorumlar">
+<section>
+  <span class="section-tag" data-i18n="reviews_tag">Yorumlar</span>
+  <h2 class="section-title" data-i18n="reviews_title">Misafirlerimiz<br>Ne Diyor?</h2>
+  <p class="section-desc" data-i18n="reviews_text">Çağlar Reis ile denize açılan misafirlerimizin Google üzerinden paylaştığı gerçek deneyimler.</p>
+
+  <div class="reviews-widget">
+    <script defer async src='https://cdn.trustindex.io/loader.js?b70110d7438a2142b4961f1cd46'></script>
+  </div>
+</section>
+</div>
+
 <!-- İLETİŞİM -->
 <div id="iletisim" style="background: var(--navy);">
 <div class="contact-wrap">
@@ -1021,7 +1040,9 @@
 const I18N = {
   tr: {
     title: `Çağlar Reis Tekne Turu`,
-    nav_tours: `Turlar`, nav_about: `Hakkımızda`, nav_contact: `İletişim`,
+    nav_tours: `Turlar`, nav_about: `Hakkımızda`, nav_contact: `İletişim`, nav_reviews: `Yorumlar`,
+    reviews_tag: `Yorumlar`, reviews_title: `Misafirlerimiz<br>Ne Diyor?`,
+    reviews_text: `Çağlar Reis ile denize açılan misafirlerimizin Google üzerinden paylaştığı gerçek deneyimler.`,
     hero_badge: `Antalya · Akdeniz`,
     hero_title: `Masmavi <em>Antalya</em>'yı<br>Denizden Keşfet`,
     hero_sub: `Çağlar Reis ile unutulmaz bir tekne turu deneyimi sizi bekliyor.`,
@@ -1062,7 +1083,9 @@ const I18N = {
   },
   en: {
     title: `Çağlar Reis Boat Tour`,
-    nav_tours: `Tours`, nav_about: `About`, nav_contact: `Contact`,
+    nav_tours: `Tours`, nav_about: `About`, nav_contact: `Contact`, nav_reviews: `Reviews`,
+    reviews_tag: `Reviews`, reviews_title: `What Our<br>Guests Say`,
+    reviews_text: `Real experiences shared on Google by guests who set sail with Çağlar Reis.`,
     hero_badge: `Antalya · Mediterranean`,
     hero_title: `Discover <em>Antalya</em>'s<br>Deep Blue by Sea`,
     hero_sub: `An unforgettable boat tour experience awaits you with Çağlar Reis.`,
@@ -1103,7 +1126,9 @@ const I18N = {
   },
   ru: {
     title: `Лодочный тур Çağlar Reis`,
-    nav_tours: `Туры`, nav_about: `О нас`, nav_contact: `Контакты`,
+    nav_tours: `Туры`, nav_about: `О нас`, nav_contact: `Контакты`, nav_reviews: `Отзывы`,
+    reviews_tag: `Отзывы`, reviews_title: `Что говорят<br>наши гости`,
+    reviews_text: `Реальные впечатления гостей, отправившихся в море с Çağlar Reis, опубликованные в Google.`,
     hero_badge: `Анталья · Средиземное море`,
     hero_title: `Откройте лазурную<br><em>Анталью</em> с моря`,
     hero_sub: `Незабываемый морской тур ждёт вас вместе с Çağlar Reis.`,
@@ -1144,7 +1169,9 @@ const I18N = {
   },
   de: {
     title: `Çağlar Reis Bootstour`,
-    nav_tours: `Touren`, nav_about: `Über uns`, nav_contact: `Kontakt`,
+    nav_tours: `Touren`, nav_about: `Über uns`, nav_contact: `Kontakt`, nav_reviews: `Bewertungen`,
+    reviews_tag: `Bewertungen`, reviews_title: `Was unsere<br>Gäste sagen`,
+    reviews_text: `Echte Erfahrungen, die Gäste auf Google geteilt haben, die mit Çağlar Reis in See gestochen sind.`,
     hero_badge: `Antalya · Mittelmeer`,
     hero_title: `Entdecke das tiefblaue<br><em>Antalya</em> vom Meer aus`,
     hero_sub: `Mit Çağlar Reis erwartet Sie ein unvergessliches Bootstour-Erlebnis.`,
@@ -1185,7 +1212,9 @@ const I18N = {
   },
   ar: {
     title: `جولة قارب Çağlar Reis`,
-    nav_tours: `الجولات`, nav_about: `من نحن`, nav_contact: `اتصل بنا`,
+    nav_tours: `الجولات`, nav_about: `من نحن`, nav_contact: `اتصل بنا`, nav_reviews: `التقييمات`,
+    reviews_tag: `التقييمات`, reviews_title: `ماذا يقول<br>ضيوفنا`,
+    reviews_text: `تجارب حقيقية شاركها على Google ضيوف أبحروا مع Çağlar Reis.`,
     hero_badge: `أنطاليا · البحر المتوسط`,
     hero_title: `اكتشف <em>أنطاليا</em><br>الزرقاء من البحر`,
     hero_sub: `تجربة جولة بحرية لا تُنسى بانتظارك مع Çağlar Reis.`,
