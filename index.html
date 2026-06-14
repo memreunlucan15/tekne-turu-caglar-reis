@@ -588,6 +588,26 @@
   }
   .form-submit:hover { background: var(--turquoise); color: var(--navy); }
 
+  /* MAP */
+  .map-wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem 5rem; }
+  .map-frame {
+    margin-top: 1.2rem;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .map-frame iframe { width: 100%; height: 380px; border: 0; display: block; }
+  .map-address {
+    display: inline-block;
+    margin-top: 0.3rem;
+    color: rgba(255,255,255,0.72);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .map-address:hover { color: var(--turquoise); }
+
   /* FOOTER */
   footer {
     background: var(--deep); color: rgba(255,255,255,0.4);
@@ -1049,6 +1069,15 @@
     </form>
   </div>
 </div>
+
+<div class="map-wrap">
+  <span class="section-tag" style="color: var(--turquoise);" data-i18n="map_title">Konum</span>
+  <a class="map-address" href="https://www.google.com/maps/search/?api=1&query=Antalya+Sea+Lux" target="_blank" rel="noopener">📍 Özlü Çayı, Kundu, 07112 Aksu/Antalya</a>
+  <div class="map-frame">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3132.07!2d30.9291923!3d36.866807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c37965c6be1479%3A0x26fb808d8c606d88!2sAntalya%20Sea%20Lux!5e0!3m2!1str!2str!4v1718200000000!5m2!1str!2str" title="Antalya Sea Lux" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  </div>
+</div>
+
 </div>
 
 <footer>
@@ -1096,7 +1125,7 @@ const I18N = {
     contact_tag: `Rezervasyon & İletişim`, contact_title: `Yerinizi Hemen<br>Ayırtın`,
     contact_text: `Sorularınız için arayabilir ya da WhatsApp'tan ulaşabilirsiniz. Hızlı dönüş garantisi.`,
     contact_wa: `WhatsApp`, contact_tel: `Telefon`,
-    contact_form_title: `Mesaj Gönderin`, contact_send: `Gönder →`,
+    contact_form_title: `Mesaj Gönderin`, contact_send: `Gönder →`, map_title: `Konum`,
     footer: `© 2026 <span>Çağlar Reis Tekne Turu</span> · Antalya, Kundu · Tüm Hakları Saklıdır`,
     form_sent: `✓ Mesajınız iletildi!`, form_sending: `Gönderiliyor...`, form_error: `Bir hata oluştu, lütfen tekrar deneyin.`
   },
@@ -1139,7 +1168,7 @@ const I18N = {
     contact_tag: `Reservation & Contact`, contact_title: `Reserve Your<br>Spot Now`,
     contact_text: `You can call us or reach us via WhatsApp for your questions. Quick response guaranteed.`,
     contact_wa: `WhatsApp`, contact_tel: `Phone`,
-    contact_form_title: `Send a Message`, contact_send: `Send →`,
+    contact_form_title: `Send a Message`, contact_send: `Send →`, map_title: `Location`,
     footer: `© 2026 <span>Çağlar Reis Boat Tour</span> · Antalya, Kundu · All Rights Reserved`,
     form_sent: `✓ Your message has been sent!`, form_sending: `Sending...`, form_error: `Something went wrong, please try again.`
   },
@@ -1182,7 +1211,7 @@ const I18N = {
     contact_tag: `Бронирование и контакты`, contact_title: `Забронируйте<br>место сейчас`,
     contact_text: `Вы можете позвонить нам или связаться через WhatsApp по любым вопросам. Гарантируем быстрый ответ.`,
     contact_wa: `WhatsApp`, contact_tel: `Телефон`,
-    contact_form_title: `Отправьте сообщение`, contact_send: `Отправить →`,
+    contact_form_title: `Отправьте сообщение`, contact_send: `Отправить →`, map_title: `Местоположение`,
     footer: `© 2026 <span>Çağlar Reis · Лодочный тур</span> · Анталья, Кунду · Все права защищены`,
     form_sent: `✓ Ваше сообщение отправлено!`, form_sending: `Отправка...`, form_error: `Произошла ошибка, попробуйте ещё раз.`
   },
@@ -1225,7 +1254,7 @@ const I18N = {
     contact_tag: `Reservierung & Kontakt`, contact_title: `Sichern Sie sich<br>jetzt Ihren Platz`,
     contact_text: `Bei Fragen können Sie uns anrufen oder über WhatsApp erreichen. Schnelle Rückmeldung garantiert.`,
     contact_wa: `WhatsApp`, contact_tel: `Telefon`,
-    contact_form_title: `Nachricht senden`, contact_send: `Senden →`,
+    contact_form_title: `Nachricht senden`, contact_send: `Senden →`, map_title: `Standort`,
     footer: `© 2026 <span>Çağlar Reis Bootstour</span> · Antalya, Kundu · Alle Rechte vorbehalten`,
     form_sent: `✓ Ihre Nachricht wurde gesendet!`, form_sending: `Wird gesendet...`, form_error: `Etwas ist schiefgelaufen, bitte erneut versuchen.`
   },
@@ -1268,7 +1297,7 @@ const I18N = {
     contact_tag: `الحجز والتواصل`, contact_title: `احجز مكانك<br>الآن`,
     contact_text: `يمكنك الاتصال بنا أو التواصل عبر واتساب لأي استفسار. نضمن لك رداً سريعاً.`,
     contact_wa: `واتساب`, contact_tel: `هاتف`,
-    contact_form_title: `أرسل رسالة`, contact_send: `إرسال →`,
+    contact_form_title: `أرسل رسالة`, contact_send: `إرسال →`, map_title: `الموقع`,
     footer: `© 2026 <span>جولة قارب Çağlar Reis</span> · أنطاليا، كوندو · جميع الحقوق محفوظة`,
     form_sent: `✓ تم إرسال رسالتك!`, form_sending: `جارٍ الإرسال...`, form_error: `حدث خطأ، يرجى المحاولة مرة أخرى.`
   }
