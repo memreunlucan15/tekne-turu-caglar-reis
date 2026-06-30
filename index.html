@@ -550,6 +550,61 @@
   transform: translateY(0);
 }
 
+/* GALLERY — clickable + "+X more" overflow tile */
+.gallery-item { cursor: pointer; }
+.gallery-item.gallery-hidden { display: none; }
+.gallery-item.gallery-more img { filter: blur(6px) brightness(0.55); }
+.gallery-more-overlay {
+  position: absolute; inset: 0; z-index: 3;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.15rem; color: var(--white);
+  background: rgba(5,25,45,0.30);
+}
+.gallery-more-count {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem; font-weight: 600; line-height: 1;
+}
+.gallery-more-label {
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.9;
+}
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(5,16,28,0.93);
+  display: none; align-items: center; justify-content: center;
+  padding: 2rem;
+}
+.lightbox.open { display: flex; }
+.lb-figure { margin: 0; display: flex; flex-direction: column; align-items: center; }
+.lb-img {
+  max-width: 90vw; max-height: 80vh; object-fit: contain;
+  border-radius: 0.6rem; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.lb-caption { color: rgba(255,255,255,0.9); margin-top: 1rem; font-size: 1rem; text-align: center; }
+.lb-btn {
+  position: absolute; background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2); color: #fff;
+  width: 48px; height: 48px; border-radius: 50%;
+  font-size: 1.7rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.lb-btn:hover { background: rgba(64,224,208,0.25); }
+.lb-close { top: 1.2rem; right: 1.2rem; }
+.lb-prev { left: 1.2rem; top: 50%; transform: translateY(-50%); }
+.lb-next { right: 1.2rem; top: 50%; transform: translateY(-50%); }
+.lb-counter {
+  position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+  color: rgba(255,255,255,0.7); font-size: 0.85rem; letter-spacing: 0.1em;
+}
+@media (max-width: 600px) {
+  .lb-btn { width: 40px; height: 40px; font-size: 1.4rem; }
+  .lb-prev { left: 0.5rem; } .lb-next { right: 0.5rem; }
+  .lb-close { top: 0.6rem; right: 0.6rem; }
+  .lightbox { padding: 1rem; }
+}
+
   /* CONTACT */
   #iletisim { background: var(--navy); color: var(--white); max-width: 100%; }
   #iletisim section { max-width: 1100px; margin: 0 auto; }
@@ -899,24 +954,56 @@
 
   <div class="gallery-grid">
     <div class="gallery-item">
-      <img src="galeri1.jpeg" alt="Çağlar Reis tekne turu manzarası">
-      <div class="gallery-caption"></div>
+      <img src="galeri1.jpeg" alt="Düden Şelalesi önünde Çağlar Reis tekne turu" loading="lazy">
+      <div class="gallery-caption" data-i18n="g1_cap">Düden Şelalesi önünde tekne turu</div>
     </div>
 
     <div class="gallery-item">
-      <img src="galeri2.jpeg" alt="Antalya koyları">
-      <div class="gallery-caption"></div>
+      <img src="galeri2.jpeg" alt="Berrak suda caretta caretta" loading="lazy">
+      <div class="gallery-caption" data-i18n="g2_cap">Berrak suda caretta caretta</div>
     </div>
 
     <div class="gallery-item">
-      <img src="galeri3.jpeg" alt="Tekne turu gün batımı">
-      <div class="gallery-caption"></div>
+      <img src="galeri3.jpeg" alt="Su altında caretta caretta ile yüzme" loading="lazy">
+      <div class="gallery-caption" data-i18n="g3_cap">Caretta caretta ile yüzme</div>
     </div>
 
     <div class="gallery-item">
-      <img src="galeri4.jpeg" alt="Denizde yüzme molası">
-      <div class="gallery-caption"></div>
+      <img src="galeri4.jpeg" alt="Teknede yemek keyfi" loading="lazy">
+      <div class="gallery-caption" data-i18n="g4_cap">Teknede yemek keyfi</div>
     </div>
+
+    <div class="gallery-item">
+      <img src="galeri5.jpeg" alt="Şelale karşısında mangal" loading="lazy">
+      <div class="gallery-caption" data-i18n="g5_cap">Şelale karşısında mangal</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galeri6.jpeg" alt="Düden Şelalesi önünde yüzme keyfi" loading="lazy">
+      <div class="gallery-caption" data-i18n="g6_cap">Şelale önünde yüzme keyfi</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galeri7.jpeg" alt="Papağanla pozlar" loading="lazy">
+      <div class="gallery-caption" data-i18n="g7_cap">Papağanımızla unutulmaz pozlar</div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="galeri8.jpeg" alt="Kaptanımız ve mutlu misafirlerimiz" loading="lazy">
+      <div class="gallery-caption" data-i18n="g8_cap">Kaptanımız ve mutlu misafirlerimiz</div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-btn lb-close" type="button" aria-label="Kapat">×</button>
+    <button class="lb-btn lb-prev" type="button" aria-label="Önceki">‹</button>
+    <figure class="lb-figure">
+      <img class="lb-img" src="" alt="">
+      <figcaption class="lb-caption"></figcaption>
+    </figure>
+    <button class="lb-btn lb-next" type="button" aria-label="Sonraki">›</button>
+    <div class="lb-counter"></div>
   </div>
 </section>
 </div>
@@ -1042,7 +1129,8 @@
   <p class="section-desc" data-i18n="reviews_text">Çağlar Reis ile denize açılan misafirlerimizin Google üzerinden paylaştığı gerçek deneyimler.</p>
 
   <div class="reviews-widget">
-    <script defer async src='https://cdn.trustindex.io/loader.js?b70110d7438a2142b4961f1cd46'></script>
+    <div id="featurable-7e2cc498-f8ef-4ff3-b064-6dfb99aae9ac" data-featurable-async></div>
+    <script src="https://cdn.featurable.com/widget/v2/embed.js" defer charset="UTF-8"></script>
   </div>
 </section>
 </div>
@@ -1163,6 +1251,7 @@ const I18N = {
     stat_label: `Kalkış Noktası`,
     gallery_tag: `Galeri`, gallery_title: `Denizden<br>Unutulmaz Kareler`,
     gallery_text: `Çağlar Reis tekne turlarından manzaralar, koylar ve keyifli anlardan birkaç kare.`,
+    g1_cap: `Düden Şelalesi önünde tekne turu`, g2_cap: `Berrak suda caretta caretta`, g3_cap: `Caretta caretta ile yüzme`, g4_cap: `Teknede yemek keyfi`, g5_cap: `Şelale karşısında mangal`, g6_cap: `Şelale önünde yüzme keyfi`, g7_cap: `Papağanımızla unutulmaz pozlar`, g8_cap: `Kaptanımız ve mutlu misafirlerimiz`, more_label: `Tümünü Gör`,
     menu_tag: `Menü`, menu_title: `Denizde Lezzetli<br>Bir Mola`,
     menu_text: `Tur sırasında misafirlerimize sunulan taze ve özenle hazırlanmış menülerle keyifli bir deniz deneyimi yaşatıyoruz.`,
     menu1_label: `Menü - 1`, menu1_name: `Balık Menü`,
@@ -1206,6 +1295,7 @@ const I18N = {
     stat_label: `Departure Point`,
     gallery_tag: `Gallery`, gallery_title: `Unforgettable Moments<br>from the Sea`,
     gallery_text: `A few shots of the views, bays and joyful moments from Çağlar Reis boat tours.`,
+    g1_cap: `Boat tour by the Düden Waterfall`, g2_cap: `A sea turtle in crystal-clear water`, g3_cap: `Swimming with sea turtles`, g4_cap: `Dining on board`, g5_cap: `Barbecue by the waterfall`, g6_cap: `Swimming by the waterfall`, g7_cap: `Posing with our parrot`, g8_cap: `Our captain with happy guests`, more_label: `See all`,
     menu_tag: `Menu`, menu_title: `A Delicious Break<br>at Sea`,
     menu_text: `We offer a pleasant sea experience with fresh, carefully prepared menus served to our guests during the tour.`,
     menu1_label: `Menu - 1`, menu1_name: `Fish Menu`,
@@ -1249,6 +1339,7 @@ const I18N = {
     stat_label: `Точка отправления`,
     gallery_tag: `Галерея`, gallery_title: `Незабываемые<br>морские кадры`,
     gallery_text: `Несколько кадров с видами, бухтами и приятными моментами из лодочных туров Çağlar Reis.`,
+    g1_cap: `Морская прогулка у водопада Дюден`, g2_cap: `Морская черепаха в кристально чистой воде`, g3_cap: `Плавание с морскими черепахами`, g4_cap: `Обед на борту`, g5_cap: `Барбекю у водопада`, g6_cap: `Купание у водопада`, g7_cap: `Фото с нашим попугаем`, g8_cap: `Наш капитан с довольными гостями`, more_label: `Смотреть все`,
     menu_tag: `Меню`, menu_title: `Вкусная пауза<br>в море`,
     menu_text: `Во время тура мы дарим приятные морские впечатления со свежими и тщательно приготовленными меню для наших гостей.`,
     menu1_label: `Меню - 1`, menu1_name: `Рыбное меню`,
@@ -1292,6 +1383,7 @@ const I18N = {
     stat_label: `Abfahrtsort`,
     gallery_tag: `Galerie`, gallery_title: `Unvergessliche<br>Momente auf See`,
     gallery_text: `Einige Aufnahmen von Ausblicken, Buchten und schönen Momenten aus den Bootstouren von Çağlar Reis.`,
+    g1_cap: `Bootstour am Düden-Wasserfall`, g2_cap: `Eine Meeresschildkröte im klaren Wasser`, g3_cap: `Schwimmen mit Meeresschildkröten`, g4_cap: `Essen an Bord`, g5_cap: `Grillen am Wasserfall`, g6_cap: `Schwimmen am Wasserfall`, g7_cap: `Posieren mit unserem Papagei`, g8_cap: `Unser Kapitän mit glücklichen Gästen`, more_label: `Alle ansehen`,
     menu_tag: `Menü`, menu_title: `Eine leckere<br>Pause auf See`,
     menu_text: `Während der Tour bieten wir unseren Gästen mit frischen, sorgfältig zubereiteten Menüs ein angenehmes Meereserlebnis.`,
     menu1_label: `Menü - 1`, menu1_name: `Fischmenü`,
@@ -1335,6 +1427,7 @@ const I18N = {
     stat_label: `نقطة الانطلاق`,
     gallery_tag: `المعرض`, gallery_title: `لحظات بحرية<br>لا تُنسى`,
     gallery_text: `بعض اللقطات للمناظر والخلجان واللحظات الممتعة من جولات قوارب Çağlar Reis.`,
+    g1_cap: `جولة بحرية أمام شلال دودان`, g2_cap: `سلحفاة بحرية في مياه صافية`, g3_cap: `السباحة مع السلاحف البحرية`, g4_cap: `وجبة على متن القارب`, g5_cap: `شواء أمام الشلال`, g6_cap: `السباحة أمام الشلال`, g7_cap: `صور مع ببغائنا`, g8_cap: `قبطاننا مع ضيوف سعداء`, more_label: `عرض الكل`,
     menu_tag: `القائمة`, menu_title: `استراحة لذيذة<br>في البحر`,
     menu_text: `خلال الجولة، نقدم لضيوفنا تجربة بحرية ممتعة مع قوائم طازجة ومُعدّة بعناية.`,
     menu1_label: `القائمة - 1`, menu1_name: `قائمة السمك`,
@@ -1405,6 +1498,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLang();
   wireForms();
   initHeroVideos();
+  initGallery();
 
   const switcher = document.querySelector('.lang-switcher');
   const toggle = document.querySelector('.lang-current');
@@ -1465,6 +1559,59 @@ function wireForms() {
 }
 
 // Cross-fade cycle through the hero background videos
+// Gallery: "+X" overflow tile + click-to-open lightbox
+function initGallery() {
+  const grid = document.querySelector('.gallery-grid');
+  const lb = document.getElementById('lightbox');
+  if (!grid || !lb) return;
+  const items = Array.from(grid.querySelectorAll('.gallery-item'));
+  const T = items.length;
+  if (T === 0) return;
+  const VISIBLE = 4;
+
+  if (T > VISIBLE) {
+    items.forEach((it, i) => {
+      if (i === VISIBLE) {
+        it.classList.add('gallery-more');
+        const ov = document.createElement('div');
+        ov.className = 'gallery-more-overlay';
+        ov.innerHTML = '<span class="gallery-more-count">+' + (T - VISIBLE) +
+          '</span><span class="gallery-more-label" data-i18n="more_label">' + t('more_label') + '</span>';
+        it.appendChild(ov);
+      } else if (i > VISIBLE) {
+        it.classList.add('gallery-hidden');
+      }
+    });
+  }
+
+  const lbImg = lb.querySelector('.lb-img');
+  const lbCap = lb.querySelector('.lb-caption');
+  const lbCounter = lb.querySelector('.lb-counter');
+  let idx = 0;
+  function capOf(i) { const c = items[i].querySelector('.gallery-caption'); return c ? c.textContent.trim() : ''; }
+  function show(i) {
+    idx = (i + T) % T;
+    const img = items[idx].querySelector('img');
+    lbImg.src = img.getAttribute('src');
+    lbImg.alt = img.getAttribute('alt') || '';
+    lbCap.textContent = capOf(idx);
+    lbCounter.textContent = (idx + 1) + ' / ' + T;
+  }
+  function openLb(i) { show(i); lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+  function closeLb() { lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+  items.forEach((it, i) => it.addEventListener('click', () => openLb(i)));
+  lb.querySelector('.lb-close').addEventListener('click', closeLb);
+  lb.querySelector('.lb-prev').addEventListener('click', e => { e.stopPropagation(); show(idx - 1); });
+  lb.querySelector('.lb-next').addEventListener('click', e => { e.stopPropagation(); show(idx + 1); });
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    else if (e.key === 'ArrowLeft') show(idx - 1);
+    else if (e.key === 'ArrowRight') show(idx + 1);
+  });
+}
+
 function initHeroVideos() {
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const vids = Array.from(document.querySelectorAll('.hero-video'));
